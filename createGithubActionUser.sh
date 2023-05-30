@@ -9,7 +9,7 @@ exit 1
 else
 
 # Generate a random password
-password=$(openssl rand -base64 12)
+password=$(openssl rand -base64 32)
 
 # Create the user with the generated password
 sudo useradd -m -p "$(openssl passwd -1 "$password")" -s /bin/bash "$username"
