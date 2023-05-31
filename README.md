@@ -12,3 +12,9 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/AmayaKids/bash/main/crea
 ```sh
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/AmayaKids/bash/main/installNodeExporter.sh?t=3)"
 ```
+
+## makeRepoSSH.sh
+Генерирует SSH-ключ для репозитория (чтобы в ставить в GitHub) и формирует для него хост в config'е ssh.
+```sh
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/AmayaKids/bash/main/makeRepoSSH.sh?t=1)"
+```
