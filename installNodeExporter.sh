@@ -73,4 +73,5 @@ fi
 # Перезапускаем службу prometheus
 echo "— Перезапуск prometheus"
 systemctl restart prometheus
+systemctl status prometheus
 echo "— Готово!"
