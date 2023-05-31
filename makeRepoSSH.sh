@@ -4,6 +4,16 @@
 echo "Введите имя репозитория (например, MyService):"
 read repo_name
 
+if [ -f ~/.ssh/"$repo_name" ]; then
+echo "Ошибка: ключ SSH с таким именем уже существует. Выход."
+exit 1
+fi
+
+if grep -q "Host $repo_name" ~/.ssh/config; then
+echo "Ошибка: хост с таким именем уже существует. Выход."
+exit 1
+fi
+
 # Генерация ключа SSH с именем репозитория
 ssh-keygen -t rsa -b 2048 -f ~/.ssh/"$repo_name" -N ""
 
