@@ -45,10 +45,6 @@ sudo systemctl daemon-reload
 sudo systemctl enable node_exporter
 sudo systemctl start node_exporter
 
-# Протестировать работоспособность
-echo "— Тест экспортера"
-curl http://localhost:9100/metrics
-
 # Настраиваем firewall
 if ! sudo iptables -L | grep --quiet --line-regexp "DROP.*tcp dpt:9100"; then
   iptables -A INPUT -p tcp -s localhost --dport 9100 -j ACCEPT
