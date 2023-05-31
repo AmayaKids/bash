@@ -10,5 +10,5 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/AmayaKids/bash/main/crea
 ## installNodeExporter.sh
 Устанавливает node_exporter в систему и применяет конфигурацию к Prometheus
 ```sh
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/AmayaKids/bash/main/installNodeExporter.sh?t=1)"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/AmayaKids/bash/main/installNodeExporter.sh?t=2)"
 ```
