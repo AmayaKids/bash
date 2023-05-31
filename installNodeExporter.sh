@@ -63,15 +63,17 @@ if cat /etc/prometheus/prometheus.yml | grep --quiet "job_name: node_exporter"; 
 else
   echo "— Добавляем конфигурацию для prometheus"
   echo '  - job_name: node_exporter
-      scrape_interval: 10s
-      static_configs:
-        - targets:
-            - localhost:9100' | sudo tee -a /etc/prometheus/prometheus.yml
+    scrape_interval: 10s
+    static_configs:
+      - targets:
+          - localhost:9100' | sudo tee -a /etc/prometheus/prometheus.yml
 fi
 
 
 # Перезапускаем службу prometheus
 echo "— Перезапуск prometheus"
 systemctl restart prometheus
-systemctl status prometheus
 echo "— Готово!"
+echo "— prometheus cofig: nano /etc/prometheus/prometheus.yml"
+echo "— prometheus status: systemctl status prometheus"
+echo "— prometheus restart: systemctl restart prometheus"
