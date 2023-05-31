@@ -14,7 +14,7 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/AmayaKids/bash/main/inst
 ```
 
 ## makeRepoSSH.sh
-Генерирует SSH-ключ для репозитория (чтобы в ставить в GitHub) и формирует для него хост в config'е ssh.
+Генерирует SSH-ключ для репозитория (чтобы вставить его в GitHub) и формирует для него хост в config'е ssh.
 ```sh
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/AmayaKids/bash/main/makeRepoSSH.sh?t=4)"
 ```
