@@ -18,3 +18,9 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/AmayaKids/bash/main/inst
 ```sh
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/AmayaKids/bash/main/makeRepoSSH.sh?t=4)"
 ```
+
+## installPrometheus.sh
+Устанавливает и делает первичную настройку prometheus.
+```sh
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/AmayaKids/bash/main/installPrometheus.sh?t=1)"
+```
