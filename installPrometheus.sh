@@ -113,7 +113,7 @@ scrape_configs:
       - targets:
           - localhost:9100
 "
-echo "$config_entry" >> /etc/prometheus/prometheus.yml
+echo "$config_entry" > /etc/prometheus/prometheus.yml
 
 # Релоад systemctl
 sudo systemctl daemon-reload
