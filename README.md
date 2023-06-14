@@ -32,6 +32,10 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/AmayaKids/bash/main/inst
 ```sh
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/AmayaKids/bash/main/installPrometheusConverter.sh?t=5)"
 ```
+Скрипт обновление утилиты:
+```sh
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/AmayaKids/bash/main/installPrometheusConverter-upd.sh?t=5)"
+```
 
 ## installPrometheusSecure.sh
 Закрывает Prometeus на сервере от внешнего мира, создаёт домен в Cloudflare и выпускает Let's Encrypt сертификат.  
