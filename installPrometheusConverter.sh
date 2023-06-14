@@ -3,22 +3,22 @@
 # Создаем директорию
 mkdir -p /go/PrometheusConverter
 
-env_rewrite=0
+ENV_REWRITE=0
 
 # Проверяем на наличие файла .env (если нет, то создаем)
 if [ ! -f /go/PrometheusConverter/.env ]; then
     touch /go/PrometheusConverter/.env
-    env_rewrite=1
+    ENV_REWRITE=1
 else
     echo ".env файл уже существует, желаете перезаписать? (y/n)"
     read answer
 
     if [ "$answer" == "y" ]; then
-        env_rewrite=1
+        ENV_REWRITE=1
     fi
 fi
 
-if [ "$env_rewrite" == 1 ]; then
+if [ $ENV_REWRITE == 1 ]; then
   # Спрашиваем название сервера
   echo "Введите название сервера:"
   read SERVER_NAME
