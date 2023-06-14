@@ -30,7 +30,7 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/AmayaKids/bash/main/inst
 Получает запрос, сравнивает Auth Bearer, запрашивает Prometheus federate, добавляет название сервера и возвращает статистику.  
 Нужна для организации системы Grafana-prometheus на всех серверах.
 ```sh
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/AmayaKids/bash/main/installPrometheusConverter.sh?t=2)"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/AmayaKids/bash/main/installPrometheusConverter.sh?t=5)"
 ```
 
 ## installPrometheusSecure.sh
