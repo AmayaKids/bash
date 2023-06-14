@@ -3,25 +3,37 @@
 # Создаем директорию
 mkdir -p /go/PrometheusConverter
 
-# Спрашиваем название сервера
-echo "Введите название сервера:"
-read SERVER_NAME
-
-# Спрашиваем пароль
-echo "Введите пароль:"
-read PASSWORD
-
-PORT=9009
-
-env_entry="SERVER_NAME=$SERVER_NAME
-PASSWORD=$PASSWORD
-PORT=$PORT
-"
+ENV_REWRITE = false
 
 # Проверяем на наличие файла .env (если нет, то создаем)
 if [ ! -f /go/PrometheusConverter/.env ]; then
     touch /go/PrometheusConverter/.env
-    echo "$env_entry" > /go/PrometheusConverter/.env
+    ENV_REWRITE = true
+else
+    echo ".env файл уже существует, желаете перезаписать? (y/n)"
+    read answer
+
+    if [ "$answer" == "y" ]; then
+        ENV_REWRITE = true
+    fi
+fi
+
+if [ "$ENV_REWRITE" == true ]; then
+  # Спрашиваем название сервера
+  echo "Введите название сервера:"
+  read SERVER_NAME
+
+  # Спрашиваем пароль
+  echo "Введите пароль:"
+  read PASSWORD
+
+  PORT=9009
+
+  env_entry="SERVER_NAME=$SERVER_NAME
+PASSWORD=$PASSWORD
+PORT=$PORT"
+
+  echo "$env_entry" > /go/PrometheusConverter/.env
 fi
 
 # Скачиваем утилиту
@@ -73,6 +85,4 @@ echo "----- PrometheusConverter is running -----"
 echo "PrometheusConverter bin: /go/PrometheusConverter/bin"
 echo "PrometheusConverter .env: /go/PrometheusConverter/.env"
 echo "PrometheusConverter service: /etc/systemd/system/PrometheusConverter.service"
-echo "PrometheusConverter port: $PORT"
-echo "PrometheusConverter server name: $SERVER_NAME"
 echo "PrometheusConverter status: systemctl status PrometheusConverter"
