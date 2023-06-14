@@ -24,3 +24,18 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/AmayaKids/bash/main/make
 ```sh
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/AmayaKids/bash/main/installPrometheus.sh?t=1)"
 ```
+
+## installPrometheusConverter.sh
+Скачивает последнюю версию утилиты по проектированию и изменению данных Prometheus federate и устанавливает её в качестве systemd-сервиса.  
+Получает запрос, сравнивает Auth Bearer, запрашивает Prometheus federate, добавляет название сервера и возвращает статистику.  
+Нужна для организации системы Grafana-prometheus на всех серверах.
+```sh
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/AmayaKids/bash/main/installPrometheusConverter.sh?t=1)"
+```
+
+## installPrometheusSecure.sh
+Закрывает Prometeus на сервере от внешнего мира, создаёт домен в Cloudflare и выпускает Let's Encrypt сертификат.  
+Так же за доменом записывает прокси на порт :9009 — утилита PrometheusConverter.
+```sh
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/AmayaKids/bash/main/installPrometheusSecure.sh?t=1)"
+```
