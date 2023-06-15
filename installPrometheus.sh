@@ -48,13 +48,6 @@ if ! systemctl is-active --quiet prometheus; then
     sudo systemctl start prometheus
 fi
 
-# Установка basic auth на prometheus
-echo "basic_auth_users:" | sudo tee /etc/prometheus/web.yml
-echo "    admin: \$2a\$12\$TzsxOscRLMvq/bvV4E.gHewmv/s9TeM/sICj3wCECdAFldUXhlRkG" | sudo tee -a /etc/prometheus/web.yml
-
-# Проверка
-promtool check web-config /etc/prometheus/web.yml
-
 # Применение новой конфигурации systemd к prometheus
 cat << EOF | sudo tee /etc/systemd/system/prometheus.service
 [Unit]
@@ -70,8 +63,7 @@ ExecStart=/usr/local/bin/prometheus \
     --config.file /etc/prometheus/prometheus.yml \
     --storage.tsdb.path /var/lib/prometheus/ \
     --web.console.templates=/etc/prometheus/consoles \
-    --web.console.libraries=/etc/prometheus/console_libraries \
-    --web.config.file=/etc/prometheus/web.yml
+    --web.console.libraries=/etc/prometheus/console_libraries
 
 [Install]
 WantedBy=multi-user.target
@@ -112,11 +104,19 @@ scrape_configs:
     static_configs:
       - targets:
           - localhost:9100
+  - job_name: 'postgresql_exporter'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['localhost:9187']
 "
 echo "$config_entry" > /etc/prometheus/prometheus.yml
 
 # Релоад systemctl
 sudo systemctl daemon-reload
+
+# Закрываем внешние порты
+iptables -A INPUT -p tcp -s localhost --dport 9090 -j ACCEPT
+iptables -A INPUT -p tcp --dport 9090 -j DROP
 
 # Запуск prometheus
 sudo systemctl start prometheus
@@ -127,3 +127,4 @@ echo "systemctl status prometheus"
 echo "systemctl restart prometheus"
 echo "systemctl start prometheus"
 echo "systemctl stop prometheus"
+echo "! Сейчас установите PrometheusConverter"
