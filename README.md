@@ -43,3 +43,9 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/AmayaKids/bash/main/inst
 ```sh
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/AmayaKids/bash/main/installPrometheusSecure.sh?t=1)"
 ```
+
+## installRedisner.sh
+Устанавливает утилиту, которая удаляет старые сессии из Redis (по флагу activeAt).  
+```sh
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/AmayaKids/bash/main/installRedisner.sh?t=1)"
+```
