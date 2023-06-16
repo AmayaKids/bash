@@ -19,13 +19,13 @@ wget -O /node/Redisner/bin https://storage.yandexcloud.net/testcloudstore/Redisn
 chmod +x /node/Redisner/bin
 
 
-# Проверяем на наличие сервиса Redisner в crontab
+# Проверяем на наличие сервиса Redisner в crontab (crontab -l)
 if [ -f /etc/crontab ]; then
-    if grep -q "Redisner" /etc/crontab; then
+    if crontab -l | grep -q "Redisner"; then
         echo "Redisner is already in crontab"
     else
         echo "Redisner is not in crontab"
-        echo "0 2 * * * root /node/Redisner/bin" >> /etc/crontab
+        crontab -l | { cat; echo "0 2 * * * root /node/Redisner/bin"; } | crontab -
         echo "Redisner is added to crontab"
     fi
 else
