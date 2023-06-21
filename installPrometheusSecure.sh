@@ -2,6 +2,35 @@
 
 # Инструмент для создания домена для Prometheus с SSL сертификатом
 
+while getopts ":a:z:s:f:h" opt; do
+  case $opt in
+    a)
+      API_KEY="$OPTARG"
+      ;;
+    z)
+      ZONE_ID="$OPTARG"
+      ;;
+    s)
+      SUBDOMAIN="$OPTARG"
+      ;;
+    f)
+      FORCED="$OPTARG"
+      ;;
+    h)
+      echo "Usage: $0 [-a API_KEY] [-z ZONE_ID] [-s SUBDOMAIN] [-f FORCED]" >&2
+      exit 1
+      ;;
+    \?)
+      echo "Invalid option: -$OPTARG" >&2
+      exit 1
+      ;;
+    :)
+      echo "Option -$OPTARG requires an argument." >&2
+      exit 1
+      ;;
+  esac
+done
+
 # Проверка на root
 if [ "$(id -u)" != "0" ]; then
   echo "Этот сценарий должен выполняться от имени root" 1>&2
@@ -43,16 +72,22 @@ echo "- Перезапускаем prometheus"
 systemctl restart prometheus
 
 # Получаем Bearer Token для Cloudflare
-echo "Введите Bearer Token для Cloudflare:"
-read -r API_KEY
+if [ -z "$API_KEY" ]; then
+  echo "Введите Bearer Token для Cloudflare:"
+  read -r API_KEY
+fi
 
 # Получаем ZONE ID для Cloudflare
-echo "Введите ZONE ID для Cloudflare:"
-read -r ZONE_ID
+if [ -z "$ZONE_ID" ]; then
+  echo "Введите ZONE ID для Cloudflare:"
+  read -r ZONE_ID
+fi
 
 # Получаем название поддомена для *.prometheus.amayakids.com
-echo "Введите название поддомена для *.prometheus.amayakids.com:"
-read -r SUBDOMAIN
+if [ -z "$SUBDOMAIN" ]; then
+  echo "Введите название поддомена для *.prometheus.amayakids.com:"
+  read -r SUBDOMAIN
+fi
 
 # Получаем IP адрес сервера (hostname -I первый IP)
 IP=$(hostname -I | cut -d' ' -f1)
@@ -71,17 +106,18 @@ echo "$EXISTING_DOMAIN_CHECK"
 
 if [[ $EXISTING_DOMAIN_CHECK == *"created_on"* ]]; then
   echo "Ошибка: домен $SUBDOMAIN.prometheus.amayakids.com уже зарегистрирован в Cloudflare." >&2
-
-  # Хотите продолжить?
-  echo "Хотите продолжить? (y/n)"
-  read -r CONTINUE
-
   DOMAIN_EXISTS_ON_CLOUDFLARE=true
-
-  # Если не продолжаем, то выходим
-  if [[ $CONTINUE != "y" ]]; then
-    echo "Выход..."
-    exit 1
+  
+  # Хотите продолжить?
+  if [ -z "$FORCED" ]; then
+    echo "Хотите продолжить? (y/n)"
+    read -r CONTINUE
+  
+    # Если не продолжаем, то выходим
+    if [[ $CONTINUE != "y" ]]; then
+      echo "Выход..."
+      exit 1
+    fi
   fi
 fi
 
