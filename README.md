@@ -18,6 +18,8 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/AmayaKids/bash/main/inst
 ```sh
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/AmayaKids/bash/main/makeRepoSSH.sh?t=4)"
 ```
+У скрипта есть аргументы:  
+- -n REPO_NAME (оригинальное название репозитория в GitHub)
 
 ## installPrometheus.sh
 Устанавливает и делает первичную настройку prometheus.
@@ -32,6 +34,10 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/AmayaKids/bash/main/inst
 ```sh
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/AmayaKids/bash/main/installPrometheusConverter.sh?t=5)"
 ```
+У скрипта есть аргументы:  
+- -n SERVER_NAME (server_instance параметр в ответе)
+- -p PASSWORD (пароль для запросов к прослойке)  
+
 Скрипт обновление утилиты:
 ```sh
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/AmayaKids/bash/main/installPrometheusConverter-upd.sh?t=5)"
@@ -43,6 +49,11 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/AmayaKids/bash/main/inst
 ```sh
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/AmayaKids/bash/main/installPrometheusSecure.sh?t=1)"
 ```
+У скрипта есть аргументы:  
+- -a API_KEY (Ключ для CloudFlare)
+- -z ZONE_ID (ID зоны в CloudFlare)
+- -s SUBDOMAIN (например, myserver)
+- -f FORCED (да, при любом значении)
 
 ## installRedisner.sh
 Устанавливает утилиту, которая удаляет старые сессии из Redis (по флагу activeAt).  
