@@ -1,5 +1,32 @@
 #!/bin/bash
 
+while getopts ":n:p:f:h" opt; do
+  case $opt in
+    n)
+      SERVER_NAME="$OPTARG"
+      ;;
+    p)
+      PASSWORD="$OPTARG"
+      ;;
+    f)
+      FORCED="$OPTARG"
+      ;;
+    h)
+      echo "Usage: $0 [-n SERVER_NAME] [-p PASSWORD] [-f FORCED]" >&2
+      exit 1
+      ;;
+    \?)
+      echo "Invalid option: -$OPTARG" >&2
+      exit 1
+      ;;
+    :)
+      echo "Option -$OPTARG requires an argument." >&2
+      exit 1
+      ;;
+  esac
+done
+
+
 # Создаем директорию
 mkdir -p /go/PrometheusConverter
 
@@ -10,22 +37,30 @@ if [ ! -f /go/PrometheusConverter/.env ]; then
     touch /go/PrometheusConverter/.env
     ENV_REWRITE=1
 else
-    echo ".env файл уже существует, желаете перезаписать? (y/n)"
-    read answer
-
-    if [ "$answer" == "y" ]; then
+    if [ -z "$FORCED" ]; then
+        echo ".env файл уже существует, желаете перезаписать? (y/n)"
+        read answer
+    
+        if [ "$answer" == "y" ]; then
+            ENV_REWRITE=1
+        fi
+    else
         ENV_REWRITE=1
     fi
 fi
 
 if [ $ENV_REWRITE == 1 ]; then
   # Спрашиваем название сервера
-  echo "Введите название сервера:"
-  read SERVER_NAME
+  if [ -z "$SERVER_NAME" ]; then
+      echo "Введите название сервера:"
+      read SERVER_NAME
+  fi
 
   # Спрашиваем пароль
-  echo "Введите пароль:"
-  read PASSWORD
+  if [ -z "$PASSWORD" ]; then
+      echo "Введите пароль:"
+      read PASSWORD
+  fi
 
   PORT=9009
 
