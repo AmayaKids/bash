@@ -1,8 +1,30 @@
 #!/bin/bash
 
+while getopts ":n:h" opt; do
+  case $opt in
+    n)
+      repo_name="$OPTARG"
+      ;;
+    h)
+      echo "Usage: $0 [-n repo_name]" >&2
+      exit 1
+      ;;
+    \?)
+      echo "Invalid option: -$OPTARG" >&2
+      exit 1
+      ;;
+    :)
+      echo "Option -$OPTARG requires an argument." >&2
+      exit 1
+      ;;
+  esac
+done
+
 # Запросить имя репозитория
-echo "Введите имя репозитория (например, MyService):"
-read repo_name
+if [ -z "$repo_name" ]; then
+  echo "Введите имя репозитория (например, MyService):"
+  read repo_name
+fi
 
 if [ -f ~/.ssh/"$repo_name" ]; then
   echo "Ошибка: ключ SSH с таким именем уже существует. Выход."
