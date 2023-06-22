@@ -69,3 +69,8 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/AmayaKids/bash/main/inst
 У скрипта есть аргументы:  
 - -n SERVER_NAME (например, mx-prod)
 - -f FORCED (да, при любом значении)
+
+Скрипт обновление утилиты:
+```sh
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/AmayaKids/bash/main/installAGSUserLogger-upd.sh?t=1)"
+```
