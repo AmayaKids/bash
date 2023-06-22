@@ -106,6 +106,12 @@ else
     systemctl restart AGSUserLogger
 fi
 
+if ! sudo iptables -L | grep --quiet --line-regexp "DROP.*tcp dpt:4444"; then
+  iptables -A INPUT -p tcp -s localhost --dport 4444 -j ACCEPT
+  iptables -A INPUT -p tcp --dport 4444 -j DROP
+  echo "— Правило firewall установлено."
+fi
+
 echo "----- AGSUserLogger is running -----"
 echo "AGSUserLogger bin: /go/AGSUserLogger/bin"
 echo "AGSUserLogger .env: /go/AGSUserLogger/.env"
