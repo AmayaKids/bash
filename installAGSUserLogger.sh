@@ -3,13 +3,13 @@
 while getopts ":n:f:h" opt; do
   case $opt in
     n)
-      SERVER_NAME="$OPTARG"
+      SERVER_INSTANCE="$OPTARG"
       ;;
     f)
       FORCED="$OPTARG"
       ;;
     h)
-      echo "Usage: $0 [-n SERVER_NAME] [-f FORCED]" >&2
+      echo "Usage: $0 [-n SERVER_INSTANCE] [-f FORCED]" >&2
       exit 1
       ;;
     \?)
@@ -48,14 +48,14 @@ fi
 
 if [ $ENV_REWRITE == 1 ]; then
   # Спрашиваем название сервера
-  if [ -z "$SERVER_NAME" ]; then
+  if [ -z "$SERVER_INSTANCE" ]; then
       echo "Введите название сервера:"
-      read SERVER_NAME
+      read SERVER_INSTANCE
   fi
 
   PORT=4444
 
-  env_entry="SERVER_NAME=$SERVER_NAME
+  env_entry="SERVER_INSTANCE=$SERVER_INSTANCE
 PORT=$PORT"
 
   echo "$env_entry" > /go/AGSUserLogger/.env
