@@ -64,7 +64,7 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/AmayaKids/bash/main/inst
 ## installAGSUserLogger.sh
 Устанавливает утилиту, которая собирает в пачки логи запросов пользователей (с body запроса и ответа) и отправляет в центральный Loki.
 ```sh
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/AmayaKids/bash/main/installAGSUserLogger.sh?t=1)"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/AmayaKids/bash/main/installAGSUserLogger.sh?t=2)"
 ```
 У скрипта есть аргументы:  
 - -n SERVER_NAME (например, mx-prod)
