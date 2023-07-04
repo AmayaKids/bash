@@ -20,7 +20,11 @@ echo "$username ALL=(ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/$username
 # Set correct permissions for the sudoers file
 sudo chmod 0440 /etc/sudoers.d/$username
 
+# Save password to file
+echo "$password" > /root/.githubactions
+
 echo "User $username has been created with the following password: $password"
+echo "Password saved at: cat /root/.githubactions"
 
 exit 0
 fi
