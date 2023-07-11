@@ -1,6 +1,11 @@
 # bash
 Bash скрипты
 
+## Как запускать с аргументами
+```
+bash -c "$(curl -fsSL https://xxx)" -- -n yyy -f 1
+```
+
 ## createGithubActionUser.sh
 Создаёт пользователя со случайным паролем для Github Actions
 ```sh
