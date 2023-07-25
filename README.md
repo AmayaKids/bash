@@ -86,5 +86,5 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/AmayaKids/bash/main/inst
 - Закрывает порт для внешнего мира;
 - Устанавливает бинарник для будущей замены в crontab.
 ```sh
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/AmayaKids/bash/main/installCronManager.sh?t=2)"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/AmayaKids/bash/main/installCronManager.sh?t=3)"
 ```
