@@ -21,7 +21,7 @@ After=network-online.target
 [Service]
 Type=simple
 WorkingDirectory=/usr/local/bin
-ExecStart=/usr/local/bin/cronmanager
+ExecStart=/usr/local/bin/cronmanager -s
 
 [Install]
 WantedBy=multi-user.target
