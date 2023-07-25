@@ -49,6 +49,19 @@ if ! sudo iptables -L | grep --quiet --line-regexp "DROP.*tcp dpt:9691"; then
   echo "— Правило firewall установлено."
 fi
 
+# Добавляем конфигурацию для prometheus
+if cat /etc/prometheus/prometheus.yml | grep --quiet "job_name: cronmanager_exporter"; then
+  echo "— Конфигурация cronmanager_exporter для Prometheus уже присутствует."
+else
+  echo "— Добавляем конфигурацию для prometheus"
+  echo '  - job_name: cronmanager_exporter
+    scrape_interval: 10s
+    static_configs:
+      - targets:
+          - localhost:9691' | sudo tee -a /etc/prometheus/prometheus.yml
+  systemctl restart prometheus
+fi
+
 echo "----- CronManager is running -----"
 echo "CronManager bin: /usr/local/bin/cronmanager"
 echo "CronManager config: /etc/cronmanager/config.json"
