@@ -79,3 +79,12 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/AmayaKids/bash/main/inst
 ```sh
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/AmayaKids/bash/main/installAGSUserLogger-upd.sh?t=1)"
 ```
+
+## installCronManager.sh
+Устанавливает утилиту (CronManager), которая помогает экспортировать в Prometeus статусы работы cron-задач.  
+- Устанавливает веб-сервер;
+- Закрывает порт для внешнего мира;
+- Устанавливает бинарник для будущей замены в crontab.
+```sh
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/AmayaKids/bash/main/installCronManager.sh?t=2)"
+```
