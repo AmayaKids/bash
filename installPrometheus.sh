@@ -108,6 +108,11 @@ scrape_configs:
     scrape_interval: 5s
     static_configs:
       - targets: ['localhost:9187']
+  - job_name: cronmanager_exporter
+    scrape_interval: 10s
+    static_configs:
+      - targets:
+          - localhost:9691
 "
 echo "$config_entry" > /etc/prometheus/prometheus.yml
 
