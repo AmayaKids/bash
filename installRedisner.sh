@@ -25,8 +25,15 @@ if [ -f /etc/crontab ]; then
         echo "Redisner is already in crontab"
     else
         echo "Redisner is not in crontab"
-        crontab -l | { cat; echo "0 2 * * * root /node/Redisner/bin"; } | crontab -
-        echo "Redisner is added to crontab"
+
+        # Проверяем на наличие cronmanager, чтобы записать в правильном формате
+        if [ -f /usr/local/bin/cronmanager ]; then
+            crontab -l | { cat; echo "cronmanager -n 'redisner' -c 'root /node/Redisner/bin'"; } | crontab -
+            echo "Redisner is added to crontab as cronmanager"
+        else
+            crontab -l | { cat; echo "0 2 * * * root /node/Redisner/bin"; } | crontab -
+            echo "Redisner is added to crontab as straight"
+        fi
     fi
 else
     echo "Crontab is not found"
