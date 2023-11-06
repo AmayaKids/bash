@@ -87,3 +87,9 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/AmayaKids/bash/main/inst
 ```sh
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/AmayaKids/bash/main/installCronManager.sh?t=3)"
 ```
+
+## installRabbitMQ.sh
+Устанавливает RabbitMQ на сервер.
+```sh
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/AmayaKids/bash/main/installRabbitMQ.sh?t=1)"
+```
