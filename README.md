@@ -93,3 +93,8 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/AmayaKids/bash/main/inst
 ```sh
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/AmayaKids/bash/main/installRabbitMQ.sh?t=1)"
 ```
+## installPostgreSQL.sh
+Устанавливает Postgresql на сервер.
+```sh
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/AmayaKids/bash/main/installPostgreSQL.sh?t=1)"
+```
