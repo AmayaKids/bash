@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 while getopts ":n:h" opt; do
   case $opt in
@@ -20,18 +21,20 @@ while getopts ":n:h" opt; do
   esac
 done
 
-# Запросить имя репозитория
+# Запросить имя репозитория, если не передано через параметр
 if [ -z "$repo_name" ]; then
   echo "Введите имя репозитория (например, MyService):"
   read repo_name
 fi
 
+# Проверка, существует ли уже файл ключа
 if [ -f ~/.ssh/"$repo_name" ]; then
   echo "Ошибка: ключ SSH с таким именем уже существует. Выход."
   exit 1
 fi
 
-if grep -q "Host $repo_name" ~/.ssh/config; then
+# Проверка, есть ли уже такой хост в ~/.ssh/config
+if grep -qE "^Host[[:space:]]+$repo_name\$" ~/.ssh/config 2>/dev/null; then
   echo "Ошибка: хост с таким именем уже существует. Выход."
   exit 1
 fi
